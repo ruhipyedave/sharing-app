@@ -1,0 +1,60 @@
+
+<div class="container">
+    <p>{{mode + " Book"}}</p>
+    <form [formGroup]="bookForm" (ngSubmit)="onSubmit()">
+        <div class="row">
+            <div class="col-25">
+                <label>Title: </label>
+            </div>
+            <div class="col-75">
+                <input type="text" formControlName="title" required>
+                <input type="hidden" formControlName="id">
+            </div>
+        </div>
+        <div class="row" *ngIf="title.invalid && (title.dirty || title.touched)"
+            class="error-container">
+            <span *ngIf="title.errors.required">
+                Title is required.
+            </span>
+        </div>
+        <div class="row">
+            <div class="col-25">
+                <label>Description: </label>
+            </div>
+            <div class="col-75">
+                <textarea type="text" formControlName="description" required></textarea>
+            </div>
+        </div>
+        <div class="row" 
+            *ngIf="description.invalid && (description.dirty || description.touched)"
+            class="error-container">
+            <span *ngIf="description.errors.required">
+                Description is required.
+            </span>
+        </div>
+        <div class="row">
+            <div class="col-25">
+                <label>Tags: </label>
+            </div>
+            <div class="col-75">
+                <!-- <span *ngFor="let tag of allTags">
+                    <input type="checkbox" formControlName="tags" value="tag">
+                    <label class="checkbox-label">{{ tag }}</label>
+                </span> -->
+                <label formArrayName="tags"
+                *ngFor="let tag of allTags; let i=index">
+                    <input type="checkbox" [formControlName]="i">
+                    <span class="checkbox-label">{{ tag }}</span>
+                </label>
+                <!-- {{ items[child.index].name }} -->
+            </div>
+        </div>
+
+            
+        <div class="row button-container">
+            <!-- <button class="m-r" [disabled]="bookForm.invalid">Submit</button> -->
+            <button class="m-r">Submit</button>
+            <button (click)="onCancel()">Cancel</button>
+        </div>
+    </form>
+</div>

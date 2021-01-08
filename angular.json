@@ -123,6 +123,11 @@
           }
         }
       }
-    }},
-  "defaultProject": "sharing-app"
+    }
+  },
+  "defaultProject": "sharing-app",
+  "cli": {
+    "analytics": false,
+    "defaultCollection": "@ngrx/schematics"
+  }
 }

@@ -1,0 +1,19 @@
+<div>
+    <button class="add-button" [routerLink]="['../create']">Add Book</button>
+</div>
+<div>
+    <ul>
+        <li *ngFor="let book of books">
+            <h4>
+                <span>{{ book.title }}</span>
+                <div class="button-container" *ngIf="isLoggedIn">
+                    <button class="m-r-5" (click)="showEditForm(book.id)">Edit</button>
+                    <button (click)="showDeleteConfirmBox(book.id)">Delete</button>
+                </div>
+            </h4>
+            <p>
+                {{ book.description }}
+            </p>
+        </li>
+    </ul>
+</div>

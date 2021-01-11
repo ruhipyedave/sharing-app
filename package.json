@@ -8,7 +8,11 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "test": "jest",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "docs:json": "compodoc -p ./tsconfig.base.json -e json -d .",
+    "storybook": "npm run docs:json && start-storybook -p 6006",
+    "build-storybook": "npm run docs:json && build-storybook",
+    "jest": "jest --watch"
   },
   "private": true,
   "dependencies": {
@@ -24,8 +28,6 @@
     "@ngrx/entity": "^10.1.2",
     "@ngrx/store": "^10.1.2",
     "@ngrx/store-devtools": "^10.1.2",
-    "@types/jest": "^26.0.20",
-    "jest-preset-angular": "^8.3.2",
     "ngx-webstorage": "^7.0.1",
     "rxjs": "^6.5.5",
     "sweetalert2": "^10.13.0",
@@ -36,14 +38,27 @@
     "@angular-devkit/build-angular": "~0.1000.0",
     "@angular/cli": "~10.0.0",
     "@angular/compiler-cli": "~10.0.0",
+    "@babel/core": "^7.12.10",
+    "@babel/preset-env": "^7.12.11",
+    "@babel/preset-typescript": "^7.12.7",
+    "@compodoc/compodoc": "^1.1.11",
     "@ngrx/schematics": "^10.1.2",
+    "@storybook/addon-actions": "^6.1.11",
+    "@storybook/addon-essentials": "^6.1.11",
+    "@storybook/addon-links": "^6.1.11",
+    "@storybook/angular": "^6.1.11",
+    "@testing-library/angular": "^10.3.0",
+    "@testing-library/jest-dom": "^5.11.8",
     "@types/jasmine": "~3.5.0",
     "@types/jasminewd2": "~2.0.3",
+    "@types/jest": "^26.0.20",
     "@types/node": "^12.11.1",
+    "babel-loader": "^8.2.2",
     "codelyzer": "^6.0.0-next.1",
     "jasmine-core": "~3.5.0",
     "jasmine-spec-reporter": "~5.0.0",
     "jest": "^26.6.3",
+    "jest-preset-angular": "^7.1.1",
     "karma": "~5.0.0",
     "karma-chrome-launcher": "~3.1.0",
     "karma-coverage-istanbul-reporter": "~3.0.2",
@@ -57,7 +72,52 @@
   "jest": {
     "preset": "jest-preset-angular",
     "setupFilesAfterEnv": [
-      "<rootDir>/src/setupJest.ts"
+      "<rootDir>/src/jest-config/setup.ts"
+    ],
+    "transformIgnorePatterns":[
+      "node_modules/(?!@storybook/*)"
+    ],
+    "testPathIgnorePatterns": [
+      "<rootDir>/node_modules/",
+      "<rootDir>/dist/",
+      "<rootDir>/storybook-static/",
+      "<rootDir>/src/test.ts"
+    ],
+    "coveragePathIgnorePatterns": [
+      "/jest-config/",
+      "/node_modules/"
+    ],
+    "snapshotSerializers": [
+      "<rootDir>/node_modules/jest-preset-angular/AngularSnapshotSerializer.js",
+      "<rootDir>/node_modules/jest-preset-angular/HTMLCommentSerializer.js"
+    ],
+    "globals": {
+      "ts-jest": {
+        "tsConfig": "<rootDir>/tsconfig.spec.json",
+        "stringifyContentPathRegex": "\\.html$",
+        "diagnostics": false,
+        "isolatedModules": true,
+        "astTransformers": [
+          "<rootDir>/node_modules/jest-preset-angular/InlineHtmlStripStylesTransformer"
+        ]
+      }
+    },
+    "moduleNameMapper": {
+      "\\.(css|less)$": "<rootDir>/src/jest-config/styleMock.js",
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/src/jest-config/fileMock.js"
+    },
+    "transform": {
+      "^.+\\.(ts|html)$": "ts-jest",
+      "^.+\\.js$": "babel-jest"
+    },
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node",
+      ".html"
     ]
   }
 }

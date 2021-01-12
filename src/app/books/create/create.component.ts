@@ -42,12 +42,14 @@ export class CreateComponent implements OnInit {
       }
     });
 
+    // this.bookForm.patchValue({});
+
     this.store.select(bookSelector).subscribe((book: Book) => {
       debugger;
       if (book) {
         this.mode = "Edit";
         this.bookForm.patchValue(book);
-      }
+      } 
     })
   }
 

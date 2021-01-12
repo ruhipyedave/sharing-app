@@ -60,6 +60,7 @@ var CreateComponent = /** @class */ (function () {
                 _this.store.dispatch(books_actions_1.getBook({ id: id }));
             }
         });
+        // this.bookForm.patchValue({});
         this.store.select(books_selectors_1.bookSelector).subscribe(function (book) {
             debugger;
             if (book) {

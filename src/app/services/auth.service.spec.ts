@@ -13,4 +13,13 @@ describe('AuthService', () => {
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
+  
+  it('login: should return token', () => {
+    expect(service).toBeTruthy();
+    service.logIn("ruhi@gmail.com", "test").subscribe(res => {
+      expect(res).toBeDefined();
+      expect(res).toHaveProperty("token");
+      expect(res.token).toBeTruthy();
+    })
+  });
 });

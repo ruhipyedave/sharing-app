@@ -18,10 +18,10 @@ export class ListComponent implements OnInit {
   isLoggedIn = false;
   books: Book[] = [];
   constructor(
-    private localSt: LocalStorageService,
     private store: Store,
     private router: Router,
     private route: ActivatedRoute,
+    private localSt: LocalStorageService,
   ) { }
 
   ngOnInit(): void {
@@ -29,7 +29,6 @@ export class ListComponent implements OnInit {
     this.isLoggedIn = this.localSt.retrieve("token") ? true : false;
     this.localSt.observe('token')
 			.subscribe((token) => {
-        debugger;
         if (token) {
           return this.isLoggedIn = true;
         }
@@ -38,13 +37,12 @@ export class ListComponent implements OnInit {
 
     this.store.dispatch(loadBooks());
     this.store.select(booksSelector).subscribe((books: Book[]) => {
-      debugger;
       this.books = books;
     })
   }
 
   showDeleteConfirmBox = (id: number) => {
-    Swal.fire({
+    return Swal.fire({
       title: 'Are you sure you want to delete this Book?',
       text: 'You will not be able to recover this Book!',
       icon: 'warning',
@@ -72,7 +70,6 @@ export class ListComponent implements OnInit {
   }
 
   showEditForm = (id: number) => {
-    debugger;
     this.router.navigate(['../edit', id], { relativeTo: this.route });
   }
 

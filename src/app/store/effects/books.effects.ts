@@ -25,7 +25,7 @@ export class BooksEffects {
             map(books => {
               debugger; return loadBooksSuccess({books})
             }),
-            catchError(error => of(loadBooksFailure(error)))
+            catchError(error => of(loadBooksFailure({error})))
           )
         }
       )
@@ -35,13 +35,14 @@ export class BooksEffects {
   loadBooksSuccess$ = createEffect(
     () => this.actions$.pipe(
       ofType(BookActionTypes.LOAD_BOOKS_SUCCESS),
-      tap((books: Book) => {
-      })
+      // tap((books: Book) => {
+      //   console.log(books);
+      // })
     ), 
     { dispatch: false }
   );
 
-  logInFailure$ = createEffect(
+  loadBooksFailure$ = createEffect(
     () => this.actions$.pipe(
       ofType(BookActionTypes.LOAD_BOOKS_FAILURE),
       tap((err) => {debugger; console.log(err)})
@@ -62,7 +63,7 @@ export class BooksEffects {
             map(book => {
               debugger; return getBookSuccess({book})
             }),
-            catchError(error => of(loadBooksFailure(error)))
+            catchError(error => of(loadBooksFailure({error})))
           )
         }
       )
@@ -90,13 +91,13 @@ export class BooksEffects {
       ofType(BookActionTypes.CREATE_BOOK),
       map(action => {debugger; return action}),
       switchMap(
-        (payload: Book) => {
+        (payload: any) => {
           debugger;
           return this.bookService.post("", payload).pipe(
             map(book => {
               debugger; return loadBooks();
             }),
-            catchError(error => of(loadBooksFailure(error)))
+            catchError(error => of(loadBooksFailure({error})))
           )
         }
       )
@@ -131,7 +132,7 @@ export class BooksEffects {
             map(book => {
               debugger; return loadBooks();
             }),
-            catchError(error => of(loadBooksFailure(error)))
+            catchError(error => of(loadBooksFailure({error})))
           )
         }
       )
@@ -166,7 +167,7 @@ export class BooksEffects {
             map(book => {
               debugger; return loadBooks();
             }),
-            catchError(error => of(loadBooksFailure(error)))
+            catchError(error => of(loadBooksFailure({error})))
           )
         }
       )

@@ -29,18 +29,18 @@ export const loadBooksSuccess = createAction(
 );
 
 export const loadBooksFailure = createAction(
-  BookActionTypes.LOAD_BOOKS_SUCCESS,
+  BookActionTypes.LOAD_BOOKS_FAILURE,
   props<{ error: any }>()
 );
 
 export const createBook = createAction(
   BookActionTypes.CREATE_BOOK,
-  props<{ data: Book[] }>()
+  props<{ data: Book }>()
 );
 
 export const createBookSuccess = createAction(
   BookActionTypes.CREATE_BOOK_SUCCESS,
-  props<{ book: Book[] }>()
+  props<{ book: Book }>()
 );
 
 export const createBookFailure = createAction(
@@ -55,7 +55,7 @@ export const editBook = createAction(
 
 export const editBookSuccess = createAction(
   BookActionTypes.EDIT_BOOK_SUCCESS,
-  props<{ book: Book[] }>()
+  props<{ book: Book }>()
 );
 
 export const editBookFailure = createAction(
@@ -70,7 +70,7 @@ export const getBook = createAction(
 
 export const getBookSuccess = createAction(
   BookActionTypes.GET_BOOK_SUCCESS,
-  props<{ book: Book[] }>()
+  props<{ book: Book }>()
 );
 
 export const getBookFailure = createAction(
@@ -85,7 +85,7 @@ export const deleteBook = createAction(
 
 export const deleteBookSuccess = createAction(
   BookActionTypes.DELETE_BOOK_SUCCESS,
-  props<{ book: Book[] }>()
+  props<{ book: Book }>()
 );
 
 export const deleteBookFailure = createAction(

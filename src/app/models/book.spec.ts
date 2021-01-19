@@ -2,6 +2,7 @@ import { Book } from './book';
 
 describe('Book', () => {
   it('should create an instance', () => {
-    expect(new Book()).toBeTruthy();
+    let book = new Book("title", "Book description", [true]);
+    expect(book).toBeTruthy();
   });
 });

@@ -17,15 +17,15 @@ export class CreateComponent implements OnInit {
   allTags = ALL_TAGS;
   mode = "Add";
   constructor(
-    private fb: FormBuilder,
     private store: Store,
-    private route: ActivatedRoute,
     private router: Router,
+    private route: ActivatedRoute,
+    private fb: FormBuilder,
   ) { }
 
   bookForm:FormGroup = this.fb.group({
     id: [],
-    title: ['', [Validators.required, Validators.email]],
+    title: ['', [Validators.required]],
     description: ['',  Validators.required],
     tags: new FormArray([])
   });
@@ -35,7 +35,6 @@ export class CreateComponent implements OnInit {
     this.allTags.forEach(() => this.tags.push(new FormControl()));
     this.route.params.subscribe(param => {
       // get book by id
-      debugger;
       const id = Number(param.id);
       if(!isNaN(id)) {
         this.store.dispatch(getBook({id}))
@@ -43,7 +42,6 @@ export class CreateComponent implements OnInit {
     });
 
     this.store.select(bookSelector).subscribe((book: Book) => {
-      debugger;
       if (book) {
         this.mode = "Edit";
         this.bookForm.patchValue(book);
@@ -61,7 +59,6 @@ export class CreateComponent implements OnInit {
 
 
   onSubmit = () => {
-    debugger;
     // edit
     const id = this.bookForm.value.id;
     if(id) {
@@ -69,13 +66,12 @@ export class CreateComponent implements OnInit {
       this.onCancel();
       return;
     }
-    console.warn(this.bookForm.value);
+    // console.warn(this.bookForm.value);
     this.store.dispatch(createBook(this.bookForm.value));
     this.onCancel();
   }
 
   onCancel = () => {
-    debugger;
     if (this.mode == "Add") {
       this.router.navigate(['../list'], { relativeTo: this.route})
       return;

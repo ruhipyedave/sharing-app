@@ -1,9 +1,10 @@
 export class Book {
     constructor(
-        title: string,
-        description: string,
-        tags: string[]
+        public title: string,
+        public description: string,
+        public tags: boolean[],
+        public id?: number,
     ) {
-        
+        this.id = Date.now();
     }
 }

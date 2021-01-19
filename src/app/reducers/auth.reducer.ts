@@ -24,7 +24,10 @@ export const initialState: State = {
 export const reducer = createReducer(
   initialState,
   on(logIn, (state, action) => {debugger; return { ...state, user: action.user }}),
-  on(logInSuccess, (state, user: User) => {debugger; return { ...state, user, isAuthenticated: true }}),
+  on(logInSuccess, (state, user: User) => {debugger; return { 
+    ...state, 
+    user, 
+    isAuthenticated: true }}),
   on(loginFailure, (state, user: User) => { debugger; 
     return { 
       user, isAuthenticated: false, 

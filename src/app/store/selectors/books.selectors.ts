@@ -6,11 +6,10 @@ export const getBookState = createFeatureSelector<State>(booksFeatureKey);
 
 export const booksSelector = createSelector(
     getBookState,
-  (state: State) => {debugger; return state.books}
+  (state: State) => state.books
 );
-
 
 export const bookSelector = createSelector(
   getBookState,
-(state: State) => {debugger; return state.book}
+(state: State) => state.book
 );
